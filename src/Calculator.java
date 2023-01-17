@@ -8,8 +8,8 @@ public class Calculator {
     private JTextField display;
 
     // variables to hold the rhs and lhs values
-    private float leftRegister = 0;
-    private float rightRegister = 0;
+    private double leftRegister = 0;
+    private double rightRegister = 0;
 
     // variable to hold what operator is being used
     private ActionListener currentOperand = null;
@@ -17,14 +17,14 @@ public class Calculator {
     // called when a operand button is clicked (+, -, *, /)
     private void OnOperandButtonClicked(ActionEvent e, ActionListener operand) {
         currentOperand = operand;
-        leftRegister = Float.parseFloat(display.getText());
+        leftRegister = Double.parseDouble(display.getText());
         display.setText("");
     }
 
     // called when the equals button is clicked
-    // parse the current value in the display as a float into the right register and execute the currentOperand action
+    // parse the current value in the display as a double into the right register and execute the currentOperand action
     private void OnEqualsButtonClicked(ActionEvent e) {
-        rightRegister = Float.parseFloat(display.getText());
+        rightRegister = Double.parseDouble(display.getText());
         currentOperand.actionPerformed(e);
     }
 
@@ -72,7 +72,7 @@ public class Calculator {
 
         // Display to show user input
         display = new JTextField();
-        display.setEditable(true);
+        display.setEditable(false);
         display.setFont(new Font("Arial", Font.PLAIN, 24));
         topArea.add(display);
 
@@ -141,8 +141,8 @@ public class Calculator {
         ActionListener divideAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = leftRegister / rightRegister;
-                display.setText(Float.toString(result));
+                double result = leftRegister / rightRegister;
+                display.setText(Double.toString(result));
             }
         };
 
@@ -150,8 +150,8 @@ public class Calculator {
         ActionListener multiplyAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = leftRegister * rightRegister;
-                display.setText(Float.toString(result));
+                double result = leftRegister * rightRegister;
+                display.setText(Double.toString(result));
             }
         };
 
@@ -159,8 +159,8 @@ public class Calculator {
         ActionListener additionAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = leftRegister + rightRegister;
-                display.setText(Float.toString(result));
+                double result = leftRegister + rightRegister;
+                display.setText(Double.toString(result));
             }
         };
 
@@ -168,8 +168,8 @@ public class Calculator {
         ActionListener subtractionAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = leftRegister - rightRegister;
-                display.setText(Float.toString(result));
+                double result = leftRegister - rightRegister;
+                display.setText(Double.toString(result));
             }
         };
 
@@ -185,7 +185,7 @@ public class Calculator {
         AddGridBagButton(bottomArea, "+/-", 0, 0, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                display.setText(Float.toString(Float.parseFloat(display.getText()) * -1));
+                display.setText(Double.toString(Double.parseDouble(display.getText()) * -1));
             }
         });
 
@@ -204,8 +204,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "√", 1, 0, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.sqrt(Float.parseFloat(display.getText()));
-                display.setText(Float.toString(result));
+                double result = (double) Math.sqrt(Double.parseDouble(display.getText()));
+                display.setText(Double.toString(result));
             }
         });
 
@@ -213,8 +213,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "^", 2 , 0, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.pow(Float.parseFloat(display.getText()), 2);
-                display.setText(Float.toString(result));
+                double result = (double) Math.pow(Double.parseDouble(display.getText()), 2);
+                display.setText(Double.toString(result));
             }
         });
 
@@ -227,10 +227,10 @@ public class Calculator {
                 JButton source = (JButton) e.getSource();
                 if (source.getText().equals("to rad")) {
                     source.setText("to deg");
-                    display.setText(Float.toString((float) Math.toRadians(Float.parseFloat(display.getText()))));
+                    display.setText(Double.toString((double) Math.toRadians(Double.parseDouble(display.getText()))));
                 } else {
                     source.setText("to rad");
-                    display.setText(Float.toString((float) Math.toDegrees(Float.parseFloat(display.getText()))));
+                    display.setText(Double.toString((double) Math.toDegrees(Double.parseDouble(display.getText()))));
                 }
             }
         });
@@ -239,8 +239,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "cos", 4, 0, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.cos(Float.parseFloat(display.getText()));
-                display.setText(Float.toString(result));
+                double result = (double) Math.cos(Double.parseDouble(display.getText()));
+                display.setText(Double.toString(result));
                 toggleRadDeg.setText("to deg");
             }
         });
@@ -249,8 +249,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "sin", 4, 1, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.sin(Float.parseFloat(display.getText()));
-                display.setText(Float.toString(result));
+                double result = (double) Math.sin(Double.parseDouble(display.getText()));
+                display.setText(Double.toString(result));
                 toggleRadDeg.setText("to deg");
             }
         });
@@ -259,8 +259,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "tan", 4, 2, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.tan(Float.parseFloat(display.getText()));
-                display.setText(Float.toString(result));
+                double result = (double) Math.tan(Double.parseDouble(display.getText()));
+                display.setText(Double.toString(result));
                 toggleRadDeg.setText("to deg");
             }
         });
@@ -269,8 +269,8 @@ public class Calculator {
         AddGridBagButton(bottomArea, "cot", 4, 3, constraints, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                float result = (float) Math.cos(Float.parseFloat(display.getText())) / (float) Math.sin(Float.parseFloat(display.getText()));
-                display.setText(Float.toString(result));
+                double result = (double) Math.cos(Double.parseDouble(display.getText())) / (double) Math.sin(Double.parseDouble(display.getText()));
+                display.setText(Double.toString(result));
                 toggleRadDeg.setText("to deg");
             }
         });
